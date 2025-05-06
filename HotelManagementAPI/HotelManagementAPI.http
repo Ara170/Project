@@ -1,0 +1,88 @@
+@HotelManagementAPI_HostAddress = http://localhost:5000
+
+### Authentication Endpoints
+
+### Register a new customer
+POST {{HotelManagementAPI_HostAddress}}/api/Auth/register
+Content-Type: application/json
+
+{
+  "username": "customer1",
+  "password": "Password123",
+  "customerName": "John Doe",
+  "birthDate": "1990-01-01",
+  "idCard": "1234567890",
+  "email": "john.doe@example.com",
+  "phoneNumber": "0123456789",
+  "address": "123 Main St, City"
+}
+
+### Login
+POST {{HotelManagementAPI_HostAddress}}/api/Auth/login
+Content-Type: application/json
+
+{
+  "username": "customer1",
+  "password": "Password123"
+}
+
+### Room Endpoints
+
+### Get all rooms
+GET {{HotelManagementAPI_HostAddress}}/api/Room
+
+### Get available rooms
+GET {{HotelManagementAPI_HostAddress}}/api/Room/available
+
+### Get room by ID
+GET {{HotelManagementAPI_HostAddress}}/api/Room/101
+
+### Create a new room (Admin only)
+POST {{HotelManagementAPI_HostAddress}}/api/Room
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "roomID": "109",
+  "roomType": 1
+}
+
+### Booking Endpoints
+
+### Get all bookings (Admin/Staff only)
+GET {{HotelManagementAPI_HostAddress}}/api/Booking
+Authorization: Bearer {{token}}
+
+### Get customer bookings
+GET {{HotelManagementAPI_HostAddress}}/api/Booking/customer
+Authorization: Bearer {{token}}
+
+### Create a booking
+POST {{HotelManagementAPI_HostAddress}}/api/Booking
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "rooms": [
+    {
+      "roomID": "101",
+      "dateIn": "2025-05-10T14:00:00",
+      "dateOut": "2025-05-12T12:00:00"
+    }
+  ]
+}
+
+### Service Endpoints
+
+### Get all services
+GET {{HotelManagementAPI_HostAddress}}/api/Service
+
+### Create a service (Admin only)
+POST {{HotelManagementAPI_HostAddress}}/api/Service
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "description": "Room Service",
+  "price": 50000
+}
